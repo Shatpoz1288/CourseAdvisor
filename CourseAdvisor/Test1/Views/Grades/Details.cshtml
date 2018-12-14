@@ -1,0 +1,50 @@
+﻿@model Test1.Models.Grade
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Grade</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Grade1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grade1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.Course_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.Course_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.Student_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.Student_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Term.Term_Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Term.Term_Start)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

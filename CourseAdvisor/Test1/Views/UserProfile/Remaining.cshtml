@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Remaining";
+}
+
+@using System.Data;
+@model System.Data.DataTable
+
+
+<h2>Remaining Courses</h2>
+
+<table class="table">
+    <tr>
+        @foreach (DataColumn col in Model.Columns)
+        {
+            <th>@col.ColumnName</th>
+        }
+    </tr>
+    <tr>
+        @foreach (DataRow row in Model.Rows)
+        {
+        <tr>
+            @foreach (DataColumn col in Model.Columns)
+            {
+                <th>@row[col.ColumnName]</th>
+            }
+        </tr>
+    }
+</table>
+
+    <hr /><hr />
+    @using (Html.BeginForm("Suggested", "UserProfile"))
+    {
+        <input id="goToSuggested" name="goToSuggested" type="submit" value="Suggested Courses">
+    }
+    <hr />

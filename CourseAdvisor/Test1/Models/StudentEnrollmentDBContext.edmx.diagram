@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9b76b601d5084bdb9607a27ba4c3d515" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="Student_EnrollmentModel.Course" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student_EnrollmentModel.Grade" Width="1.5" PointX="14.875" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student_EnrollmentModel.Program_Course" Width="1.5" PointX="10.625" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student_EnrollmentModel.Requisite" Width="1.5" PointX="16.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student_EnrollmentModel.Sequential" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student_EnrollmentModel.Student" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student_EnrollmentModel.Term" Width="1.5" PointX="12.875" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="Student_EnrollmentModel.FK_Grade_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Student_EnrollmentModel.FK_Program_Course_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Student_EnrollmentModel.FK_Grade_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="Student_EnrollmentModel.FK_Grade_Term" ManuallyRouted="false" />
+        <AssociationConnector Association="Student_EnrollmentModel.FK_Program_Course_Sequential1" ManuallyRouted="false" />
+        <AssociationConnector Association="Student_EnrollmentModel.FK_Program_Course_Term" ManuallyRouted="false" />
+        <AssociationConnector Association="Student_EnrollmentModel.SequentialToStudent" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

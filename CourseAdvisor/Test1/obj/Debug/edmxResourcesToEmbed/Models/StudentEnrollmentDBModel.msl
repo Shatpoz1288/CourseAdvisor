@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Student_EnrollmentModelStoreContainer" CdmEntityContainer="Student_EnrollmentEntities">
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="Student_EnrollmentModel.Course">
+        <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+          <ScalarProperty Name="Course_name" ColumnName="Course_name" />
+          <ScalarProperty Name="Credits" ColumnName="Credits" />
+          <ScalarProperty Name="Requisites" ColumnName="Requisites" />
+          <ScalarProperty Name="Requisite" ColumnName="Requisite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grades">
+      <EntityTypeMapping TypeName="Student_EnrollmentModel.Grade">
+        <MappingFragment StoreEntitySet="Grade">
+          <ScalarProperty Name="Term_ID" ColumnName="Term_ID" />
+          <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+          <ScalarProperty Name="Student_email" ColumnName="Student_email" />
+          <ScalarProperty Name="Grade1" ColumnName="Grade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requisites">
+      <EntityTypeMapping TypeName="Student_EnrollmentModel.Requisite">
+        <MappingFragment StoreEntitySet="Requisites">
+          <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+          <ScalarProperty Name="Requisite_ID" ColumnName="Requisite_ID" />
+          <ScalarProperty Name="Requisite1" ColumnName="Requisite" />
+          <ScalarProperty Name="Requisite11" ColumnName="Requisite1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sequentials">
+      <EntityTypeMapping TypeName="Student_EnrollmentModel.Sequential">
+        <MappingFragment StoreEntitySet="Sequential">
+          <ScalarProperty Name="SequentialID" ColumnName="SequentialID" />
+          <ScalarProperty Name="Sequential_Name" ColumnName="Sequential_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="Student_EnrollmentModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Student_email" ColumnName="Student_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Terms">
+      <EntityTypeMapping TypeName="Student_EnrollmentModel.Term">
+        <MappingFragment StoreEntitySet="Term">
+          <ScalarProperty Name="Term_ID" ColumnName="Term_ID" />
+          <ScalarProperty Name="Term_Year" ColumnName="Term_Year" />
+          <ScalarProperty Name="Term_Start" ColumnName="Term_Start" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Program_Course" TypeName="Student_EnrollmentModel.Program_Course" StoreEntitySet="Program_Course">
+      <EndProperty Name="Course">
+        <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+      </EndProperty>
+      <EndProperty Name="Sequential">
+        <ScalarProperty Name="SequentialID" ColumnName="SequentialID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SequentialToStudent" TypeName="Student_EnrollmentModel.SequentialToStudent" StoreEntitySet="SequentialToStudent">
+      <EndProperty Name="Sequential">
+        <ScalarProperty Name="SequentialID" ColumnName="SequentialID" />
+      </EndProperty>
+      <EndProperty Name="Student">
+        <ScalarProperty Name="Student_email" ColumnName="Student_email" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Student_EnrollmentModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

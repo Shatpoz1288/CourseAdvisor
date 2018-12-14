@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+@{
+    if (User.Identity.GetUserName() != "0")
+    {
+        ViewBag.Title = User.Identity.GetUserName() + " User's Profile";
+    }
+    else { ViewBag.Title = " User's Profile"; }
+}
+
+<h3>@ViewBag.Title</h3>
+
+
+<hr /> <hr />
+
+<h2>User Options    </h2>
+
+<hr />
+
+<form action='@Url.Action("Index","UserProfile")' method='POST'>
+    <!-- Example DropDownList -->
+    <select id='YourDropDown' name='YourDropDown'>
+        <option value='COEN'>Computer Engineering</option>
+        <option value='ELEN'>Electrical Engineering</option>
+    </select>
+
+    <!-- Your Submit button -->
+    <input type='submit' value='Submit' />
+</form>
+
+<hr />
+
+@using (Html.BeginForm("Index", "Grades"))
+{
+    <input id="goToApproved" name="goToApproved" type="submit" value="Taken courses">
+}
+<hr /><hr />
+
+@using (Html.BeginForm("Remaining", "UserProfile"))
+{
+    <input id="goToRemaining" name="goToRemaining" type="submit" value="Remaining courses">
+}
+<hr />

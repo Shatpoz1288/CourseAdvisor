@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Student_EnrollmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="Course_ID" />
+    </Key>
+    <Property Name="Course_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Course_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Credits" Type="Int32" Nullable="false" />
+    <Property Name="Requisites" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Requisite" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Grades" Relationship="Self.FK_Grade_Course" FromRole="Course" ToRole="Grade" />
+    <NavigationProperty Name="Sequentials" Relationship="Self.Program_Course" FromRole="Course" ToRole="Sequential" />
+  </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="Term_ID" />
+      <PropertyRef Name="Course_ID" />
+      <PropertyRef Name="Student_email" />
+    </Key>
+    <Property Name="Term_ID" Type="Int32" Nullable="false" />
+    <Property Name="Course_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Student_email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Grade1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_Grade_Course" FromRole="Grade" ToRole="Course" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_Grade_Student" FromRole="Grade" ToRole="Student" />
+    <NavigationProperty Name="Term" Relationship="Self.FK_Grade_Term" FromRole="Grade" ToRole="Term" />
+  </EntityType>
+  <EntityType Name="Requisite">
+    <Key>
+      <PropertyRef Name="Course_ID" />
+      <PropertyRef Name="Requisite_ID" />
+    </Key>
+    <Property Name="Course_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Requisite_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Requisite1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Requisite11" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Sequential">
+    <Key>
+      <PropertyRef Name="SequentialID" />
+    </Key>
+    <Property Name="SequentialID" Type="Int32" Nullable="false" />
+    <Property Name="Sequential_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Courses" Relationship="Self.Program_Course" FromRole="Sequential" ToRole="Course" />
+    <NavigationProperty Name="Students" Relationship="Self.SequentialToStudent" FromRole="Sequential" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Student_email" />
+    </Key>
+    <Property Name="Student_email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Grades" Relationship="Self.FK_Grade_Student" FromRole="Student" ToRole="Grade" />
+    <NavigationProperty Name="Sequentials" Relationship="Self.SequentialToStudent" FromRole="Student" ToRole="Sequential" />
+  </EntityType>
+  <EntityType Name="Term">
+    <Key>
+      <PropertyRef Name="Term_ID" />
+    </Key>
+    <Property Name="Term_ID" Type="Int32" Nullable="false" />
+    <Property Name="Term_Year" Type="Int32" />
+    <Property Name="Term_Start" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Grades" Relationship="Self.FK_Grade_Term" FromRole="Term" ToRole="Grade" />
+  </EntityType>
+  <Association Name="FK_Grade_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Course_ID" />
+      </Principal>
+      <Dependent Role="Grade">
+        <PropertyRef Name="Course_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grade_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_email" />
+      </Principal>
+      <Dependent Role="Grade">
+        <PropertyRef Name="Student_email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grade_Term">
+    <End Role="Term" Type="Self.Term" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Term">
+        <PropertyRef Name="Term_ID" />
+      </Principal>
+      <Dependent Role="Grade">
+        <PropertyRef Name="Term_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Program_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <End Role="Sequential" Type="Self.Sequential" Multiplicity="*" />
+  </Association>
+  <Association Name="SequentialToStudent">
+    <End Role="Sequential" Type="Self.Sequential" Multiplicity="*" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Student_EnrollmentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Courses" EntityType="Self.Course" />
+    <EntitySet Name="Grades" EntityType="Self.Grade" />
+    <EntitySet Name="Requisites" EntityType="Self.Requisite" />
+    <EntitySet Name="Sequentials" EntityType="Self.Sequential" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="Terms" EntityType="Self.Term" />
+    <AssociationSet Name="FK_Grade_Course" Association="Self.FK_Grade_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Grade" EntitySet="Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grade_Student" Association="Self.FK_Grade_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Grade" EntitySet="Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grade_Term" Association="Self.FK_Grade_Term">
+      <End Role="Term" EntitySet="Terms" />
+      <End Role="Grade" EntitySet="Grades" />
+    </AssociationSet>
+    <AssociationSet Name="Program_Course" Association="Self.Program_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Sequential" EntitySet="Sequentials" />
+    </AssociationSet>
+    <AssociationSet Name="SequentialToStudent" Association="Self.SequentialToStudent">
+      <End Role="Sequential" EntitySet="Sequentials" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="Student_EnrollmentModel.sysdiagram" />
+  </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>
